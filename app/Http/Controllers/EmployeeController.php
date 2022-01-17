@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Institution;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -16,7 +17,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return view('insert.em');
+        $employee=  Employee::all();
+        return view('employee.show', compact('employee'));
     }
 
     /**
@@ -26,8 +28,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $employee=  Employee::get();
-        return view('insert.em',compact('employee'));
+        $institution = Institution::all();
+        return view('employee.add',compact('institution'));
     }
 
     /**
@@ -41,25 +43,45 @@ class EmployeeController extends Controller
         $validatedData = $request->validate([
 
             'emp_name' =>  'required|min:3',
-            'institution_name' => 'required',
+
             'inst_name' => 'required',
              'appation_date' => 'required',
              'age' => 'required',
             'primary_sal' => 'required',
+          //  'tax_value' => 'required',
             'email' => 'required',
         ]);
+        //  return $request;
+        try {
+            DB::beginTransaction();
 
         Employee::create([
             'emp_name'=>$request ->emp_name,
-            'institution_name'=>$request -> institution_id,
-            'inst_name'=>$request -> institution_id,
+            'institution_id'=>$request -> inst_name,
+
              'appation_date'=>$request -> appation_date,
              'age'=>$request ->age,
             'primary_sal'=>$request ->primary_sal,
+           // 'tax_value' => $request->tax_value,
             'email'=>$request ->email,
         ]);
+            DB::commit();
 
-        return redirect()->route('employees.show');
+            return redirect()->route('employees')
+                ->with('success','تم اضافة  الموظف بنجاح');
+
+        } catch (\Exception $ex) {
+            DB::rollBack();
+            return $ex;
+            return $ex;
+
+            return redirect()->route('employees')
+                ->with('error','حدث خطا ما الرجاء المحاوله لاحقا');
+
+
+        }
+
+       
 
     }
 
@@ -72,7 +94,8 @@ class EmployeeController extends Controller
     public function show()
     {
         $employees=DB::table('employees')->get();
-       return View::make('show.emp')->with(array('employees'=>$employees));
+       return View::make('employee.show')->with(array('employees'=>$employees));
+
     }
 
     /**
@@ -84,8 +107,9 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $emp = Employee::findOrFail($id);
+        $institution = Institution::all();
 
-        return view('edit.emp',compact('emp'));
+        return view('employee.edit',compact('emp', 'institution'));
 
 
 
@@ -97,20 +121,34 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id){
+    public function update(Request $request)
+    {
+        //return $request;
+        try {
+            DB::beginTransaction();
+            // $type = $request->id;
+            Employee::find($request->id)->update([
+                'emp_name' => $request->emp_name,
+                'institution_id' => $request->inst_name,
+                'appation_date' => $request->appation_date,
+                'age' => $request->age,
+                'primary_sal' => $request->primary_sal,
+               // 'tax_value' => $request->tax_value,
+                'email' => $request->email,
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('employees')
+                ->with('success', 'تم تعديل بيانات الموظف بنجاح');
+        } catch (\Exception $ex) {
+            DB::rollBack();
+
+            return redirect()->route('employees')
+                ->with('success', 'لم يتم تعديل بيانات الموظف حدث خطا');
 
 
-        $data = $request->except('_method','_token','submit');
-
-        $employee = Employee::find($id);
-
-        if($employee->update($data)){
-
-           Session::flash('message', 'Update successfully!');
-           Session::flash('alert-class', 'alert-success');
         }
-           return redirect()->route('employees.show');
-
     }
 
     /**
@@ -122,11 +160,29 @@ class EmployeeController extends Controller
 
 
     public function destroy($id){
-        Employee::destroy($id);
-        Session::flash('message', 'Delete successfully!');
-        Session::flash('alert-class', 'alert-success');
+        try {
+            //validation
+            //update database
+            $employees = Employee::find($id);
+            if (!$employees)
 
-        return redirect()->route('employees.show');
+                Session::flash('message', 'Delete not successfully!');
+            Session::flash('alert-class', 'alert-danger');
+
+
+            $employees->delete();
+
+            Session::flash('message', 'Delete successfully!');
+            Session::flash('alert-class', 'alert-success');
+
+            return redirect()->route('employees')
+                ->with('success','تم حذف الموظف بنجاح');
+
+
+        } catch (\Exception $ex) {
+            return redirect()->route('employees')->with(['error' => 'حدث خطا ما الرجاء المحاولة لاحقا']);
+        }
+
     }
 
 }

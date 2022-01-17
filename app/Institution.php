@@ -32,4 +32,9 @@ class Institution extends Model
         return $this->hasMany('App\Employee','employee_id', 'id');
     }
 
+    public function invoice ()
+    {
+        return $this->hasMany('App\Invoice','invoice_id', 'id');
+    }
+
 }

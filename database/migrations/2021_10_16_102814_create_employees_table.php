@@ -21,6 +21,7 @@ class CreateEmployeesTable extends Migration
             $table->foreign('institution_id')->references('id')->on('institutions')->onDelete('cascade');
             $table->integer('age');
             $table->float('primary_sal');
+            $table->float('tax_value');
             $table->string('email');
             $table->timestamps();
 

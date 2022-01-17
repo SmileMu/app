@@ -3,7 +3,7 @@
     <!-- Internal Nice-select css  -->
     <link href="{{URL::asset('assets/plugins/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet" />
 @section('title')
-    تعديل بيانات مؤسسه
+    اضافة موظف جديد
 @stop
 
 
@@ -13,8 +13,8 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto"> المؤسسات</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ تعديل
-                مؤسسه</span>
+                <h4 class="content-title mb-0 my-auto">الموظفين</h4><span class="text-muted mt-1 tx-13 mr-2 mb-0">/ اضافة
+                موظف</span>
             </div>
         </div>
     </div>
@@ -50,11 +50,10 @@
                         </div>
                     </div><br>
                     <form class="form"
-                          action="{{route('institutions.update')}}"
+                          action="{{route('employees.store')}}"
                           method="POST"
                           enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" name="id" value="{{$institution -> id}}">
                         {{--                           <form class="parsley-style-1" autocomplete="off" name="selectForm2"--}}
                         {{--                    action=" {{route('types.store')}}" method="POST">--}}
                         {{--                               @csrf--}}
@@ -66,28 +65,28 @@
 
                         <div class="row mg-b-20">
                             <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="lnWrapper">
-                                <label>اسم المؤسسه </label>
+                                <label>اسم الموظف </label>
                                 <input class="form-control form-control-sm mg-b-20" data-parsley-class-handler="#lnWrapper"
-                                       name="name" value="{{$institution -> inst_name}}" required type="text">
+                                       name="emp_name" required type="text">
                             </div>
 
                             <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="">
-                                <label> تاريخ التاسيس </label>
+                                <label> تاريخ التعيين</label>
                                 <input class="form-control form-control-sm mg-b-20" data-parsley-class-handler="#lnWrapper"
-                                       name="date" value="{{$institution -> found_year}}" required type="date">
+                                       name="appation_date" required type="date">
                             </div>
 
 
                             <div class="form-group col-md-6">
-                                <label for=""> نوع المؤسسه
+                                <label for="">اسم المؤسسه
                                 </label>
-                                <select name="type_name" id="" class="form-control ">
-                                    <optgroup label="من فضلك أختر نوع المؤسسه ">
-                                        @if($type && $type -> count() > 0)
-                                            @foreach($type as $types)
+                                <select name="inst_name" id="" class="form-control ">
+                                    <optgroup label="من فضلك أختر اسم المؤسسه ">
+                                        @if($institution && $institution -> count() > 0)
+                                            @foreach($institution as $institutions)
                                                 <option
                                                     {{--                                                                                {{ old('emp_id') == $job->id  }}--}}
-                                                    value="{{$types -> id }}">{{$types -> type_name }}</option>
+                                                    value="{{$institutions -> id }}">{{$institutions -> inst_name }}</option>
                                             @endforeach
                                         @endif
                                     </optgroup>
@@ -98,39 +97,28 @@
                                 {{--                            @enderror--}}
 
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="emp_id"> قطاع المؤسسه
-                                </label>
-                                <select name="section_type" id="" class="form-control">
-                                    <optgroup label="من فضلك أختر قطاع المؤسسه ">
-                                        @if($section && $section -> count() > 0)
-                                            @foreach($section as $sections)
-                                                <option
-                                                    {{--                                                                                {{ old('emp_id') == $job->id  }}--}}
-                                                    value="{{$sections -> id }}">{{$sections -> section_type }}</option>
-                                            @endforeach
-                                        @endif
-                                    </optgroup>
 
-                                </select>
-
-                            </div>
 
 
                             <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="">
-                                <label> الموقع </label>
+                                <label> العمر </label>
                                 <input class="form-control form-control-sm mg-b-20" data-parsley-class-handler="#lnWrapper"
-                                       name="location" value="{{$institution -> location}}" required type="text">
+                                       name="age" required type="text">
                             </div>
                             <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="">
-                                <label> التلفون </label>
+                                <label> المرتب</label>
                                 <input class="form-control form-control-sm mg-b-20" data-parsley-class-handler="#lnWrapper"
-                                       name="phone" value="{{$institution -> phone_no}}" required type="text">
+                                       name="primary_sal" required type="text">
                             </div>
+                          <!--  <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="">
+                                <label> قيمة الضريبة</label>
+                                <input class="form-control form-control-sm mg-b-20" data-parsley-class-handler="#lnWrapper"
+                                       name="tax_value" required type="text">
+                            </div>-->
                             <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="">
                                 <label> البريد الالكتروني </label>
                                 <input class="form-control form-control-sm mg-b-20" data-parsley-class-handler="#lnWrapper"
-                                       name="email" value="{{$institution -> email}}" required type="email">
+                                       name="email" required type="email">
                             </div>
 
                         </div>

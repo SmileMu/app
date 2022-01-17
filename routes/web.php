@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
+Route::get('/a', function () {
     return view('auth.login');
 });
 
@@ -107,7 +108,6 @@ Route::resource('users','UserController');
     ######################################## end inistitution setions routes  ########################################
 
 
-
     ######################################## inistitution  routes  ########################################
     Route::group(['prefix' => 'institutions'], function () {
         Route::get('/', 'InstitutionController@index')->name('institutions');
@@ -119,7 +119,24 @@ Route::resource('users','UserController');
         Route::get('delete/{id}', 'InstitutionController@destroy')->name('institutions.delete');
 
     });
-    ######################################## end inistitution routes  ########################################
+    ######################################## end inistitution  routes  ########################################
+
+
+
+
+
+    ######################################## employee routes  ########################################
+    Route::group(['prefix' => 'employees'], function () {
+        Route::get('/', 'EmployeeController@index')->name('employees');
+        Route::get('create', 'EmployeeController@create')->name('employees.create');
+        Route::get('print', 'EmployeeController@print')->name('employees.print');
+        Route::post('store', 'EmployeeController@store')->name('employees.store');
+        Route::get('edit/{id}', 'EmployeeController@edit')->name('employees.edit');
+        Route::post('update', 'EmployeeController@update')->name('employees.update');
+        Route::get('delete/{id}', 'EmployeeController@destroy')->name('employees.delete');
+
+    });
+    ######################################## end employee routes  ########################################
 
 
 
