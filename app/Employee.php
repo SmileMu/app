@@ -8,7 +8,7 @@ class Employee extends Model
 {
     protected $fillable = [
         'emp_name', 'institution_id', 'appation_date', 'age',
-        'primary_sal', 'email' ,'tax_value',
+        'primary_sal', 'email' ,'tax_value','password',
 
     ];
     protected $primaryKey = 'id';

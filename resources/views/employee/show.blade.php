@@ -60,7 +60,8 @@
                                 <th class="wd-20p border-bottom-0">العمر</th>
                                 <th class="wd-20p border-bottom-0">المرتب </th>
                                 <th class="wd-20p border-bottom-0">قيمة الضريبة </th>
-                                <th class="wd-20p border-bottom-0">ايميل </th>
+                                <th class="wd-20p border-bottom-0">الايميل </th>
+                                <th class="wd-20p border-bottom-0">كلمة المرور </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -79,6 +80,7 @@
                                     <td>{{ $employees->age }}</td>
                                     <td>{{ $employees->tax_value }}</td>
                                     <td>{{ $employees->email }}</td>
+                                    <td>{{ $employees->password }}</td>
                                     <td>
                                         {{-- @can('تعديل مستخدم') --}}
                                         <a href="{{ route('employees.edit', $employees->id) }}" class="btn btn-sm btn-info"

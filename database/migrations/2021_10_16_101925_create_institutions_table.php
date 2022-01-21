@@ -31,6 +31,7 @@ class CreateInstitutionsTable extends Migration
             $table->string('location');
             $table->integer('phone_no');
             $table->string('email');
+            $table->string('password');
             $table->timestamps();
 
 

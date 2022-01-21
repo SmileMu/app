@@ -214,7 +214,7 @@
 {{--                --}}{{-- @endcan --}}
 {{--            </ul>--}}
 
-                <li class="side-item side-item-category">الاعدادات</li>
+                <!--<li class="side-item side-item-category">الاعدادات</li>
 
             <li class="slide">
                 <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg
@@ -251,7 +251,7 @@
                     <li><a class="slide-item" href="{{ url('/' . ($page = 'products')) }}">المنتجات</a></li>
                     {{-- @endcan --}}
                 </ul>
-            </li>
+            </li>-->
             {{-- @endcan --}}
         </ul>
     </div>

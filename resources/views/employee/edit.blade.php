@@ -117,11 +117,17 @@
                             <label> قيمة الضريبة</label>
                             <input class="form-control form-control-sm mg-b-20" data-parsley-class-handler="#lnWrapper"
                                    name="tax_value" required type="text" value="{{$emp ->tax_value}}">
-                        </div>-->
+                        </div> -->
                         <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="">
                             <label> البريد الالكتروني </label>
                             <input class="form-control form-control-sm mg-b-20" data-parsley-class-handler="#lnWrapper"
                                    name="email" required type="email" value="{{$emp ->email}}">
+                        </div>
+
+                        <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="">
+                            <label> كلمة المرور  </label>
+                            <input class="form-control form-control-sm mg-b-20" data-parsley-class-handler="#lnWrapper"
+                                   name="password" required type="password" value="{{$emp ->password}}">
                         </div>
 
 

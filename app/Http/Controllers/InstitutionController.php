@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Institutation;
 use App\Section;
 use App\Type;
+use Hash;
 
 class InstitutionController extends Controller
 {
@@ -55,10 +56,14 @@ class InstitutionController extends Controller
              'location' => 'required',
             'phone' => 'required',
             'email' => 'required',
+            'password' => 'required',
         ]);
       //  return $request;
         try {
             DB::beginTransaction();
+            $input = $request->all();
+
+            $input['password'] = Hash::make($input['password']);
 
             Institution::create([
             'inst_name'=>$request ->name,
@@ -68,6 +73,7 @@ class InstitutionController extends Controller
             'location'=>$request ->location,
             'phone_no'=>$request ->phone,
             'email'=>$request ->email,
+                'password' =>$request -> password,
 
 
 
@@ -141,6 +147,7 @@ class InstitutionController extends Controller
                 'location'=>$request ->location,
                 'phone_no'=>$request ->phone,
                 'email'=>$request ->email,
+                'password' =>$request -> password,
             ]);
 
             DB::commit();

@@ -133,6 +133,12 @@
                                        name="email" value="{{$institution -> email}}" required type="email">
                             </div>
 
+                            <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="">
+                                <label> كلمة المرور  </label>
+                                <input class="form-control form-control-sm mg-b-20" data-parsley-class-handler="#lnWrapper"
+                                       name="password" value="{{$institution -> password}}" required type="password">
+                            </div>
+
                         </div>
 
 

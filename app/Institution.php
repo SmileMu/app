@@ -8,7 +8,7 @@ class Institution extends Model
 {
     protected $fillable = [
         'inst_name', 'found_year', 'type_id', 'section_id',
-         'location','phone_no','email'
+         'location','phone_no','email','password',
 ];
      protected $primaryKey = 'id';
      protected $table = 'institutions';

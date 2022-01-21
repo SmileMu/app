@@ -61,6 +61,7 @@
                                 <th class="wd-20p border-bottom-0">موقع المؤسسه</th>
                                 <th class="wd-20p border-bottom-0">تلفون المؤسسه</th>
                                 <th class="wd-20p border-bottom-0">ايميل المؤسسه</th>
+                                <th class="wd-20p border-bottom-0">كلمة المرور </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -77,6 +78,7 @@
                                     <td>{{ $inistitutions->location }}</td>
                                     <td>{{ $inistitutions->phone_no }}</td>
                                     <td>{{ $inistitutions->email }}</td>
+                                    <td>{{ $inistitutions->password }}</td>
                                     <td>
                                         {{-- @can('تعديل مستخدم') --}}
                                         <a href="{{ route('institutions.edit', $inistitutions->id) }}" class="btn btn-sm btn-info"

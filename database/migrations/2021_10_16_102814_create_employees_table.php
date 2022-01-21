@@ -23,6 +23,7 @@ class CreateEmployeesTable extends Migration
             $table->float('primary_sal');
             $table->float('tax_value');
             $table->string('email');
+            $table->string('password');
             $table->timestamps();
 
 

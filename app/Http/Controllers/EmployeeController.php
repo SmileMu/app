@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use View;
 use App\Employee;
+use Hash;
 class EmployeeController extends Controller
 {
     /**
@@ -50,10 +51,14 @@ class EmployeeController extends Controller
             'primary_sal' => 'required',
           //  'tax_value' => 'required',
             'email' => 'required',
+            'password' => 'required',
         ]);
         //  return $request;
         try {
             DB::beginTransaction();
+            $input = $request->all();
+
+            $input['password'] = Hash::make($input['password']);
 
         Employee::create([
             'emp_name'=>$request ->emp_name,
@@ -64,6 +69,8 @@ class EmployeeController extends Controller
             'primary_sal'=>$request ->primary_sal,
            // 'tax_value' => $request->tax_value,
             'email'=>$request ->email,
+            'password' =>$request -> password,
+
         ]);
             DB::commit();
 
@@ -81,7 +88,7 @@ class EmployeeController extends Controller
 
         }
 
-       
+
 
     }
 
@@ -135,6 +142,7 @@ class EmployeeController extends Controller
                 'primary_sal' => $request->primary_sal,
                // 'tax_value' => $request->tax_value,
                 'email' => $request->email,
+                'password' => $request->password,
             ]);
 
             DB::commit();
